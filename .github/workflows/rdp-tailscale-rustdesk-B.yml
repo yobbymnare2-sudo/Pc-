@@ -62,8 +62,8 @@ jobs:
       max-parallel: 10
     timeout-minutes: 370
     env:
-      RDP_USER: toxic
-      RDP_PASS: yobby
+      RDP_USER: Bullettemporary
+      RDP_PASS: Bullet@12345
 
     steps:
       - name: Set CRD flag early (safe read)
@@ -165,12 +165,12 @@ jobs:
 
           function Yes($v){ "$v" -match '^(?i:true|1|yes|on)$' }
 
-          # UNLIMITED LOGIC: 999999 mins (~694 days) unless quick_test
+          # Modified logic: Unlimited unless it's a quick_test
           $runtime = 999999
           if (Yes("${{ inputs.quick_test }}")) { $runtime = 5 }
 
           "RUNTIME_MINUTES=$runtime" | Out-File -Append $env:GITHUB_ENV
-          Write-Host "Hostname: $hn  | Runtime: $runtime (Unlimited)"
+          Write-Host "Hostname: $hn  | Runtime: $runtime (0 = unlimited)"
 
       - name: Purge bullet* devices (single-instance only)
         if: ${{ needs.setup.outputs.multi == '0' }}
